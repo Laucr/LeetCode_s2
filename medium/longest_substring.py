@@ -9,6 +9,8 @@ Given "bbbbb", the answer is "b", with the length of 1.
 
 Given "pwwkew", the answer is "wke", with the length of 3. Note that the answer must be a substring, "pwke" is a subsequence and not a substring.
 """
+# rather difficult
+# should be written in C
 
 
 def lengthOfLongestSubstring(s):
@@ -16,41 +18,24 @@ def lengthOfLongestSubstring(s):
     :type s: str
     :rtype: int
     """
-    stack = ""
-    i = 0
     maxval = 0
-    while i < len(s):
-        if s[i] not in stack:
-            stack += s[i]
-            i += 1
-            maxval = max(maxval, len(stack))
+    label_l = 0
+    usedchar = {}
+
+    # 0123456
+    # tmmzuxt
+
+    for i in range(len(s)):
+        if s[i] in usedchar and label_l <= usedchar[s[i]]:
+            label_l = usedchar[s[i]] + 1
         else:
-            maxval = max(maxval, len(stack))
-            label_l = i - len(stack) + 1
-            i = label_l
-            stack = ""
+            maxval = max(maxval, i - label_l + 1)
+
+        usedchar[s[i]] = i
+        print usedchar, label_l
+        print maxval
     return maxval
 
-# 0123
-# dvdf
-# d
-# dv
-#  v
-#  vd
-#  vdf
 
-    # start = maxLength = 0
-    # usedChar = {}
-    #
-    # for i in range(len(s)):
-    #     if s[i] in usedChar and start <= usedChar[s[i]]:
-    #         start = usedChar[s[i]] + 1
-    #     else:
-    #         maxLength = max(maxLength, i - start + 1)
-    #
-    #     usedChar[s[i]] = i
-    #     print usedChar
-    #
-    # return maxLength
-
-print lengthOfLongestSubstring("abcabcbb")
+# lengthOfLongestSubstring("abcabcbb")
+lengthOfLongestSubstring("tmmzuxt")
