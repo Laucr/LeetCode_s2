@@ -37,7 +37,10 @@ def manacher(s):
         if length[i] + i > point_right_most:
             point_right_most = length[i] + i
             point_longest_centre = i
-        palindrome_len = max(palindrome_len, length[i])
+        if palindrome_len < length[i]:
+            palindrome_len = length[i]
+            point_longest_centre = i
+        # palindrome_len = max(palindrome_len, length[i])
 
     return palindrome_len - 1
 print manacher("abcbd")
