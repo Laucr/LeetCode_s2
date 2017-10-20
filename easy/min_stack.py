@@ -50,9 +50,6 @@ class MinStack(object):
         if len(self.minimal) > 0:
             return self.minimal[-1][0]
 
-# -3
-# 0
-# -2
 
 obj = MinStack()
 obj.push(-3)
