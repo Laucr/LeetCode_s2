@@ -4,26 +4,15 @@ def find132pattern(nums):
     :rtype: bool
     """
     stack = []
-    for num in nums:
-        if len(stack) == 0:
-            stack.append(num)
-        elif len(stack) == 1:
-            if stack[-1] > num:
-                stack.pop()
-            stack.append(num)
+    temp = None
+    for num in nums[::-1]:
+        if num < temp:
+            return True
         else:
-            if stack[-1] > num:
-                popped = stack.pop()
-                if num > stack[-1]:
-                    return True
-                else:
-                    stack.append(popped)
-                    pass
-            else:
-                stack.pop()
-                stack.append(num)
-
+            while stack and num > stack[-1]:
+                temp = stack.pop()
+        stack.append(num)
     return False
 
 
-print find132pattern([8, 10, 4, 6, 5])
+print find132pattern([-1, 3, 2, 0])
