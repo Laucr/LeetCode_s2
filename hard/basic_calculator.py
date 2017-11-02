@@ -5,7 +5,7 @@ def calculate(s):
     """
     op = ''
     operator = []
-    calc = []
+    operands = []
     for c in s:
         if c == ' ':
             continue
@@ -14,20 +14,32 @@ def calculate(s):
         else:
             operator.append(c)
             if op:
-                calc.append(op)
+                operands.append(op)
             op = ''
     if op:
-        calc.append(op)
-
+        operands.append(op)
+    sign = 1
     stack = []
-    sign = 0
-    for p in operator:
-        if p == '+':
-        elif p == '-':
-        elif p == '(':
-        elif p == ')':
-
+    print operands
     print operator
-    print calc
+    for o in operator:
+        if o == '(':
+            if stack and stack[-1] == -1:
+                sign *= -1
+        elif o == ')':
+            sign = 1
 
-calculate("(1+(4+5+2)-3)+(6+8)")
+        elif o == '+':
+            stack.append(sign * 1)
+        elif o == '-':
+            stack.append(sign * -1)
+    print stack
+    res = int(operands[0])
+    for i in range(1, len(operands)):
+        res += int(operands[i]) * stack[i - 1]
+    return res
+
+
+print calculate("(3-(2-(5-(9-(4)))))")
+
+#
