@@ -19,10 +19,15 @@ def trap(height):
                     total += start - stack.pop()
                 stack.append(h)
                 start = stack[-1]
-    print stack
+    if stack and start != stack[-1]:
+        end = stack.pop()
+        while stack and stack[-1] != start:
+            if stack[-1] > end:
+                end = stack.pop()
+            else:
+                total += end - stack.pop()
 
     return total
 
 
-he = [0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1]
-print trap(he)
+print trap([4, 2, 0, 3, 2, 5])
